@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Notifications\TwoFactorCode;
 use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -44,5 +45,12 @@ class LoginController extends Controller
     {
         $user->generateTwoFactorCode();
         $user->notify(new TwoFactorCode());
+
+        // Generates API KEY
+        $user->generateAPIKey();
+
+        // Update last_connection
+        $user->last_connection = Carbon::now();
+        $user->save();
     }
 }

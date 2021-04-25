@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+// Controllers
+use App\Http\Controllers\API\UserController as APIUserController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:api')->group(function() {
+    Route::get('/user', [APIUserController::class, 'current']);
+    Route::get('/user/{user}', [APIUserController::class, 'show']);
+    Route::post('/user/{user}', [APIUserController::class, 'update']);
+    Route::delete('/user/{user}', [APIUserController::class, 'destroy']);
 });

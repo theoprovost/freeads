@@ -31,6 +31,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'two_factor_code',
+        'api_token',
         'two_factor_expires_at'
     ];
 
@@ -77,11 +78,6 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->notify(new ResetPassword($token));
     }
 
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class);
-    }
-
     public function generateTwoFactorCode()
     {
         $this->timestamps = false; // no updated_at !
@@ -101,5 +97,13 @@ class User extends Authenticatable implements MustVerifyEmail
     public function hasVerifiedEmail()
     {
         return $this->email_verified_at != null ? true : false;
+    }
+
+    public function generateAPIKey($length = 80){
+        do {
+            $this->api_token = substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
+        } while ($this->where('api_token', $this->api_token)->exists());
+
+        $this->save();
     }
 }

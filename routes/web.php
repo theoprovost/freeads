@@ -27,8 +27,4 @@ Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['auth', 'verified:web', 'twofactor', 'share_current_user']], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-    Route::get('/user/{user}', [App\Http\Controllers\UserController::class, 'show']);
-    Route::post('/user/{user}', [App\Http\Controllers\UserController::class, 'update']);
-    Route::delete('/user/{user}', [App\Http\Controllers\UserController::class, 'destroy']);
 });
