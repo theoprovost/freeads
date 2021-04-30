@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use App\Models\Ads;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Auth\Notifications\ResetPassword;
 
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -32,7 +33,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'two_factor_code',
         'api_token',
-        'two_factor_expires_at'
+        'two_factor_expires_at',
+        'github_id',
+        'auth_type',
     ];
 
     /**
@@ -105,5 +108,16 @@ class User extends Authenticatable implements MustVerifyEmail
         } while ($this->where('api_token', $this->api_token)->exists());
 
         $this->save();
+    }
+
+    // Relationship
+    public function ads()
+    {
+        return $this->hasMany(Ads::class);
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Messages::class);
     }
 }

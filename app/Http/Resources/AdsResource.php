@@ -2,9 +2,10 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\MinUserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class AdsResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,22 +17,15 @@ class UserResource extends JsonResource
     {
         return [
             'id' => $this->id,
-
-            'first_name' => $this->first_name,
-            'last_name' => $this->last_name,
-            'email' => $this->email,
-            'password' => $this->password,
-
-            'email_verified_at' => $this->email_verified_at,
-            'last_connection' => $this->last_connection,
-
-            'api_token' => $this->api_token,
-
+            'title' => $this->title,
+            'description' => $this->description,
+            'price' => $this->price,
+            'category' => $this->categories,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'deleted_at' => $this->deleted_at,
-
-            'ads' => $this->ads
+            'media' => count($this->media) === 0 ? null : $this->media,
+            'author' => (new MinUserResource($this->user))
         ];
     }
 }

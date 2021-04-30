@@ -1,8 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\API\AdsController;
+use App\Http\Resources\AdsCollection;
 
 class HomeController extends Controller
 {
@@ -23,6 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // Retrieve last 8 ads posted
+        $last_ads = new AdsCollection((new AdsController)->retrieveLastAds());
+        return view('home', compact('last_ads'));
     }
 }

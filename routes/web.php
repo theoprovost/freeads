@@ -19,6 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Github auth or registration
+Route::get('auth/github', [App\Http\Controllers\GitHubController::class, 'gitRedirect']);
+Route::get('auth/github/callback', [App\Http\Controllers\GitHubController::class, 'gitCallback']);
+
+
 Route::get('verify/resend', [App\Http\Controllers\Auth\TwoFactorController::class, 'resend'])->name('verify.resend');
 Route::resource('verify', App\Http\Controllers\Auth\TwoFactorController::class)->only(['index', 'store']);
 

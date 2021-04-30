@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class MinUserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,23 +15,10 @@ class UserResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
-            'email' => $this->email,
-            'password' => $this->password,
-
-            'email_verified_at' => $this->email_verified_at,
-            'last_connection' => $this->last_connection,
-
-            'api_token' => $this->api_token,
-
             'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'deleted_at' => $this->deleted_at,
-
-            'ads' => $this->ads
+            'deleted_at' => $this->deleted_at
         ];
     }
 }

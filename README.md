@@ -43,10 +43,15 @@
 
 ## About the project
 ### Abstract
--- TO DO
+The subject was an introduction to the MVC pattern through the Laravel framework. It was realized during the beginning of the second semester of my first year in Epitech. The aims of this project covers only the back-end concerns. Nevertheless, a small front-end project and a Postman workspace are provided as detailed bellow.
+This project is only available on a local machine for the moment.
 
 ### Notable features
--- TO DO
+- Secured registration with verification by email
+- Or via OAuth (GitHub, Google)
+- Secured login with two factor auth
+- CRUD User, Ads
+- Basic search bar for Ads
 
 ### Built with
 -- TO DO
